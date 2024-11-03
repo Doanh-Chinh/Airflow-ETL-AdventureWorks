@@ -1,0 +1,4 @@
+# Provider dependencies
+apache-airflow-providers-apache-spark==4.11.0
+apache-airflow-providers-apache-hdfs==4.5.1
+apache-airflow-providers-apache-hive==8.2.0

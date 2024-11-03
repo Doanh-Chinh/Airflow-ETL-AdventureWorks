@@ -1,0 +1,99 @@
+# References:
+# bitnami/spark: https://raw.githubusercontent.com/bitnami/containers/main/bitnami/spark/docker-compose.yml
+# apache/hadoop: https://hub.docker.com/r/apache/hadoop
+# apache/hive: https://hive.apache.org/developement/quickstart/
+
+x-hadoop-common: &hadoop-common
+  image: apache/hadoop:3
+  env_file: ./containers/hadoop/hadoop.env
+
+services:
+  # Airflow
+  airflow:
+    build: 
+      context: ./containers/airflow
+    env_file: ./containers/airflow/airflow.env
+    volumes:
+      - ./src/dags:/opt/airflow/dags
+      - ./src/jobs:/opt/airflow/jobs
+      - ./src/config:/opt/airflow/config
+      - ./src/utils:/opt/airflow/plugins/utils
+      - ./logs/airflow:/opt/airflow/logs
+      - ./data:/data
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+
+  # Spark
+  spark-master:
+    image: bitnami/spark:3.5
+    env_file: ./containers/spark/spark-master.env
+    ports:
+      - 8081:8080
+    networks:
+      - my_network
+
+  spark-worker:
+    image: bitnami/spark:3.5
+    env_file: ./containers/spark/spark-worker.env
+    networks:
+      - my_network
+
+  # HDFS
+  hdfs-namenode:
+    <<: *hadoop-common
+    hostname: namenode
+    command: ["hdfs", "namenode"]
+    ports:
+      - 9870:9870
+    environment:  
+      - ENSURE_NAMENODE_DIR=/tmp/hadoop-hadoop/dfs/name
+    networks:
+      - my_network
+  
+  hdfs-datanode:
+    <<: *hadoop-common
+    command: ["hdfs", "datanode"]
+    networks:
+      - my_network
+
+  # Hive
+  hive-metastore:
+    image: apache/hive:4.0.0
+    depends_on:
+      - hdfs-namenode
+    hostname: hive-metastore
+    environment:
+      - HIVE_CUSTOM_CONF_DIR=/hive-custom-conf
+      - SERVICE_NAME=metastore
+    volumes:
+      - ./containers/hive:/hive-custom-conf
+    networks:
+      - my_network
+
+  hive-server:
+    image: apache/hive:4.0.0
+    depends_on:
+      - hive-metastore
+    hostname: hive-server
+    environment:
+      - HIVE_SERVER2_THRIFT_PORT=10000
+      - HIVE_CUSTOM_CONF_DIR=/hive-custom-conf
+      - IS_RESUME=true
+      - SERVICE_NAME=hiveserver2
+      - TZ=Asia/Ho_Chi_Minh
+      - JAVA_TOOL_OPTIONS=-Duser.timezone=Asia/Ho_Chi_Minh
+    volumes:
+      - ./logs/hiveserver:/tmp/hive/
+      - ./containers/hive:/hive-custom-conf
+    ports:
+      - 10002:10002
+    networks:
+      - my_network
+
+
+# Define the network
+networks:
+  my_network:
+    driver: bridge

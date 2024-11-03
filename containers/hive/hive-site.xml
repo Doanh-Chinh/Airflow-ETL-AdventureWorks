@@ -1,0 +1,62 @@
+<configuration>
+
+    <!-- Configs for creating & starting containers -->
+    <property>
+        <name>hive.server2.enable.doAs</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>hive.exec.scratchdir</name>
+        <value>/opt/hive/scratch_dir</value>
+    </property>
+
+    <property>
+        <name>hive.user.install.directory</name>
+        <value>/opt/hive/install_dir</value>
+    </property>
+
+    <property>
+        <name>hive.exec.submit.local.task.via.child</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>metastore.metastore.event.db.notification.api.auth</name>
+        <value>false</value>
+    </property>
+
+    <!-- Custom config -->
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://hive-metastore:9083</value>
+    </property>
+
+    <property>
+        <name>metastore.warehouse.dir</name>
+        <value>hdfs://namenode:8020/data_warehouse</value>
+    </property>
+    
+    <property>
+        <name>hive.execution.engine</name>
+        <value>spark</value>
+    </property>
+
+    <property>
+        <name>hive.exec.dynamic.partition</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.exec.dynamic.partition.mode</name>
+        <value>nonstrict</value>
+    </property>
+    <!-- <property>
+        <name>hive.exec.local.time.zone</name>
+        <value>Asia/Ho_Chi_Minh</value>
+    </property>
+    <property>
+        <name>hive.exec.local.timezone</name>
+        <value>Asia/Ho_Chi_Minh</value>
+    </property> -->
+</configuration>
