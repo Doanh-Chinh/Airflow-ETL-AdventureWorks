@@ -70,7 +70,7 @@ This ETL pipeline loads local data into Hadoop, processes and transforms it with
 ### Airflow DAG: Orchestrates tasks such as data ingestion, transformation, and loading into the data warehouse.
 ![dag](assets/images/DAG-Graph.png)
 ### Entity Relational Diagram
-Data Warehouse Schema: Organized into dimension and fact tables, storing sales, customer, employee, geography, product, promotion, and sales territory data.
+**Data Warehouse Schema:** Organized into dimension and fact tables, storing sales, customer, employee, geography, product, promotion, and sales territory data.
 
 ![erd](assets/images/Entity-Relational-Diagram-Sales-AdventureWorks.png)
 
@@ -107,7 +107,8 @@ make down
 
 # Supporters
 Thank [@Thong-Cao](https://github.com/Thong-Cao) for giving me a chance to complete my work.
-Thank [@previous-work](https://github.com/minkminkk/etl-opensky) for providing an fantastic ETL pipeline and configuration files that helps a lot for this project.
+
+Thank [@previous-work](https://github.com/minkminkk/etl-opensky) for providing a fantastic ETL pipeline and configuration files that helps a lot for this project.
 
 <!-- Badges -->
 [forks-shield]: https://img.shields.io/github/forks/Doanh-Chinh/Airflow-ETL-AdventureWorks.svg?style=for-the-badge
