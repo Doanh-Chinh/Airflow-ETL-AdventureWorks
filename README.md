@@ -1,5 +1,3 @@
-<a name="readme-top"></a>
-
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
@@ -21,6 +19,7 @@ This project is an ETL (Extract, Transform, Load) pipeline designed to load, tra
 📦 Airflow-ETL-AdventureWorks
 ├─ Makefile
 ├─ README.md
+├─ docker-compose.yml
 ├─ containers
 │  ├─ airflow
 │  │  ├─ Dockerfile
@@ -35,7 +34,6 @@ This project is an ETL (Extract, Transform, Load) pipeline designed to load, tra
 │     ├─ spark-master.env
 │     └─ spark-worker.env
 ├─ data
-├─ docker-compose.ym
 ├─ logs
 │  ├─ airflow
 │  └─ hiveserve
@@ -68,7 +66,9 @@ This ETL pipeline loads local data into Hadoop, processes and transforms it with
 
 ### Data Flow: Structured data flow from raw input to refined warehouse tables.
 ### Airflow DAG: Orchestrates tasks such as data loading, transformation, and loading into the data warehouse.
+### Entity Relational Diagram
 Data Warehouse Schema: Organized into dimension and fact tables, storing sales, customer, employee, geography, product, promotion, and sales territory data.
+![screenshot](assets/images/Entity-Relational-Diagram-Sales-AdventureWorks.png)
 # Installation
 ## 1. Setup
 ### Clone the project:
@@ -80,11 +80,6 @@ cd Airflow-ETL-AdventureWorks
 ```
 make setup
 ```
-### Tear Down
-To stop and remove all containers:
-```
-make down
-```
 ## 2. Getting Started
 ### Interfaces
 Access each service’s UI:
@@ -95,7 +90,11 @@ Access each service’s UI:
 - `Hive`: Through the Hive CLI in the container
 ### Query Pipeline Output in Data Warehouse
 Run queries in Hive CLI within the container to access processed data in the data warehouse tables.
-
+## 3. Tear Down
+To stop and remove all containers:
+```
+make down
+```
 
 <!-- Badges -->
 [forks-shield]: https://img.shields.io/github/forks/Doanh-Chinh/Airflow-ETL-AdventureWorks.svg?style=for-the-badge
