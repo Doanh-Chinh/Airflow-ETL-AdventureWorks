@@ -83,7 +83,7 @@ cd Airflow-ETL-AdventureWorks
 ```
 ### Build and start the containers:
 ```
-make setup
+make up
 ```
 ## 2. Getting Started
 ### Interfaces
@@ -105,7 +105,7 @@ make down
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Supporters
+# Acknowledgment
 Thank [@Thong-Cao](https://github.com/Thong-Cao) for giving me a chance to complete my work.
 
 Thank [@previous-work](https://github.com/minkminkk/etl-opensky) for providing a fantastic ETL pipeline and configuration files that helps a lot for this project.
